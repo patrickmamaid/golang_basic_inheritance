@@ -26,9 +26,11 @@ type Cat struct {
 	AliveThing
 }
 
-func (c Cat) Age() int {
-	return 3
-}
+// if you comment and uncomment this
+// you can see how c.Age() will either use, the cats age or ic age
+// func (c Cat) Age() int {
+// 	return 3
+//}
 
 func (c Cat) Lick() error {
 	fmt.Println("cat licked")
