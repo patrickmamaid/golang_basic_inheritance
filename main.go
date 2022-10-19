@@ -6,7 +6,13 @@ type AliveThing interface {
 	IsDead() bool
 	Age() int
 }
-type ImmortalCat struct {
+type Animal interface {
+	Lick() error
+}
+
+// ----------------------------------------------------------------------------------------
+
+type ImmortalCat struct { // is type AliveThing
 	age int
 }
 
@@ -18,25 +24,23 @@ func (ic ImmortalCat) Age() int {
 	return ic.age
 }
 
-type Animal interface {
-	Lick() error
-}
+// ----------------------------------------------------------------------------------------
 
-type Cat struct {
-	AliveThing
+type Cat struct { // is type Animal AND AliveThing
+	// hidden from view, its also implmements Animal
+	AliveThing // explicit, I am telling people now I am an alive thing
 }
-
-// if you comment and uncomment this
-// you can see how c.Age() will either use, the cats age or ic age
-// func (c Cat) Age() int {
-// 	return 3
-//}
 
 func (c Cat) Lick() error {
 	fmt.Println("cat licked")
-
 	return nil
 }
+
+//if you comment and uncomment this
+//you can see how c.Age() will either use, the cats age or ic age
+//func (c Cat) Age() int {
+//	return 3
+//}
 
 func main() {
 	ic := ImmortalCat{
